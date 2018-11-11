@@ -1,6 +1,7 @@
-package com.example.user.componentes
+package com.example.user.componentes.view
 
 import android.app.ProgressDialog
+import android.content.Intent
 import android.graphics.Color
 import android.os.Bundle
 import android.support.design.widget.Snackbar
@@ -8,6 +9,8 @@ import android.support.v4.content.ContextCompat
 import android.support.v7.app.AppCompatActivity
 import android.view.View
 import android.widget.*
+import com.example.user.componentes.R
+import com.example.user.componentes.mock.Mock
 import kotlinx.android.synthetic.main.activity_main.*
 
 class MainActivity : AppCompatActivity(), View.OnClickListener, AdapterView.OnItemSelectedListener,SeekBar.OnSeekBarChangeListener {
@@ -33,7 +36,10 @@ class MainActivity : AppCompatActivity(), View.OnClickListener, AdapterView.OnIt
         mainBtnGetSeekValue.setOnClickListener(this)
         mainBtnSetSeekValue.setOnClickListener(this)
         //
+        mainBtnCallDateAct.setOnClickListener(this)
+        //
         mainSeekbar.setOnSeekBarChangeListener(this)
+
     }
 
     override fun onClick(v: View) {
@@ -55,9 +61,16 @@ class MainActivity : AppCompatActivity(), View.OnClickListener, AdapterView.OnIt
             getSeekVal()
         }else if(id == R.id.mainBtnSetSeekValue){
             setSeekVal()
+        }else if(id == R.id.mainBtnCallDateAct){
+            callDateAct()
         }
 
         //14:28 a 15:24 tela fica preta sem video e audio
+    }
+
+    private fun callDateAct() {
+        val mIntent = Intent(this,DateActivity::class.java)
+        startActivity(mIntent)
     }
 
     private fun setSeekVal() {
@@ -144,7 +157,7 @@ class MainActivity : AppCompatActivity(), View.OnClickListener, AdapterView.OnIt
         snack.view.setBackgroundColor(Color.RED)
         //Pegar cor do arquivo
         //resources.getColor(R.color.colorAccent)//Deprecated
-        ContextCompat.getColor(this,R.color.colorAccent)//Novo metodo para pegar cor
+        ContextCompat.getColor(this, R.color.colorAccent)//Novo metodo para pegar cor
         //Mostrar implementação da Action
         snack.setAction(
             "Desfazer"//Texto da ação
